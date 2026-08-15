@@ -108,6 +108,14 @@ class Plan:
         return(-3,-3)
 
     @staticmethod
+    def index_valid(char):
+        test=Plan.sep_index(char)
+        valid=1
+        for i in test:
+            valid^=bool(i)
+        return bool(valid)
+
+    @staticmethod
     def syn_index(section, plan):
         return Plan.num2char(section)+str(plan) if str(section).isdigit() and str(plan).isdigit() else ""
 
@@ -167,7 +175,10 @@ class Plan:
         t_6m = t_6m % 10
         return(t_h,t_6m)
 
-    def add_group(self):
+    def add_log(self, plan, time, content):
+        self.plan["log"].append({
+            "plan"
+        })
 
 def text_head(plan, date0=None):
     date = date0 if date0 else (t(1), t(2), t(3))
