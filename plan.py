@@ -175,9 +175,73 @@ class Plan:
         t_6m = t_6m % 10
         return(t_h,t_6m)
 
-    def add_log(self, plan, time, content):
+    def add_log(self, day, plan, time, content, date=None):
+        #开发者注：本部分有一些约定。在制作文档时务必清晰呈现
+        h=t(4)
+        m=t(5)
+        try:
+            if str(time[0]).isdigit() and time[0]<24 and str(time[1]).isdigit() and (time[1]<60 or time[1]==99):
+                time_c=(time[0],time[1])
+            if str(time).isdigit() and time<24:
+                time_c=(time[0],99)
+        except:
+            time_c=(99,99)
+        if not time:
+            time_c = (h, m)
+        if time=="acc":
+            time_c = (h, m)
+        if time=="nacc":
+            time_c = (h, 99)
+        if time[0:2]=="m-":
+            time_c = (h, m)
+            if time[2:].isdigit():
+                    time_c = (time_c[0], time_c[1] - int(time[2:]))
+        if time[0:2]=="h-":
+            time_c = (h, 99)
+            if time[2:].isdigit():
+                    time_c = (time_c[0] - int(time[2:]), time_c[1])
+        if time[0:2]=="t-":
+            time_c = (h, m)
+            sep=time[2:].find(':')
+            if sep == -1:
+                if time[2:].isdigit():
+                    dt=(int(time[2:]),0)
+                else:
+                    dt = (time_c[0] - 99, time_c[1] - 99)
+            else:
+                if time[2:sep].isdigit() and time[sep+1:].isdigit():
+                    dt=(int(time[2:sep]),int(time[sep+1:]))
+                else:
+                    dt = (time_c[0] - 99, time_c[1] - 99)
+            time_c = (time_c[0]-dt[0], time_c[1]-dt[1])
+        if time_c[0]==99:
+            raise ValueError("Not a valid time")
+            return
+        if day.isdigit():
+            day_c = int(day)
+        else:
+            raise ValueError("Not a valid day")
+        while time_c[1]<0:
+            time_c = (time_c[0]-1, time_c[1]+60)
+        while time_c[0]<0:
+            time_c = (time_c[0]+24, time_c[1])
+            day_c-=1
+        content_c=content
+        plan_c = plan if Plan.index_valid(plan) else "base"
+        if plan_c != "base":
+            if "_advance_" in content:
+                content_c= f"Move {plan} forward"
+            if "_finish_" in content:
+                content_c= f"finish plan {plan}"
+            if not content:
+                content_c= f"Worked on {plan}"
+        else:
+            content_c= "Got some work done"
         self.plan["log"].append({
-            "plan"
+            "day": day_c,
+            "time": time_c,
+            "plan": plan_c,
+            "content": content_c
         })
 
 def text_head(plan, date0=None):
