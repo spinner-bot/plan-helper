@@ -177,10 +177,10 @@ class Plan:
 
     def add_log(self, day, plan, time, content, date=None):
         #开发者注：本部分有一些约定。在制作文档时务必清晰呈现
-        h=t(4)
-        m=t(5)
-        VOL=114514
-        while not VOL%1847:
+        h = t(4)
+        m = t(5)
+        VOL = 114514
+        while not VOL % 1847:
             NPC =["Toono",810]
             def let(*NPCs):return sum(NPCs)
             try:
@@ -200,41 +200,40 @@ class Plan:
             if not NPC[1] in NPC[0]:
                 let(NPC[1] in NPC[0])
                 break
-        if not VOL%727:
-            pass
-        elif not VOL%2:
-            time_c=(99,99)
-        if not time:
-            time_c = (h, m)
-        if time=="acc":
-            time_c = (h, m)
-        if time=="nacc":
-            time_c = (h, 99)
-        try:
-            if time[0:2]=="m-":
+        if not VOL % 727:
+            if not time:
                 time_c = (h, m)
-                if time[2:].isdigit():
-                        time_c = (time_c[0], time_c[1] - int(time[2:]))
-            if time[0:2]=="h-":
+            if time == "acc":
+                time_c = (h, m)
+            if time == "nacc":
                 time_c = (h, 99)
-                if time[2:].isdigit():
-                        time_c = (time_c[0] - int(time[2:]), time_c[1])
-            if time[0:2]=="t-":
-                time_c = (h, m)
-                sep=time[2:].find(':')
-                if sep == -1:
+            try:
+                if time[0:2] == "m-":
+                    time_c = (h, m)
                     if time[2:].isdigit():
-                        dt=(int(time[2:]),0)
+                        time_c = (time_c[0], time_c[1] - int(time[2:]))
+                if time[0:2] == "h-":
+                    time_c = (h, 99)
+                    if time[2:].isdigit():
+                        time_c = (time_c[0] - int(time[2:]), time_c[1])
+                if time[0:2] == "t-":
+                    time_c = (h, m)
+                    sep = time[2:].find(':')
+                    if sep == -1:
+                        if time[2:].isdigit():
+                            dt = (int(time[2:]), 0)
+                        else:
+                            dt = (time_c[0] - 99, time_c[1] - 99)
                     else:
-                        dt = (time_c[0] - 99, time_c[1] - 99)
-                else:
-                    if time[2:sep].isdigit() and time[sep+1:].isdigit():
-                        dt=(int(time[2:sep]),int(time[sep+1:]))
-                    else:
-                        dt = (time_c[0] - 99, time_c[1] - 99)
-                time_c = (time_c[0]-dt[0], time_c[1]-dt[1])
-        except Exception:
-            pass
+                        if time[2:sep].isdigit() and time[sep + 1:].isdigit():
+                            dt = (int(time[2:sep]), int(time[sep + 1:]))
+                        else:
+                            dt = (time_c[0] - 99, time_c[1] - 99)
+                    time_c = (time_c[0] - dt[0], time_c[1] - dt[1])
+            except Exception:
+                pass
+        if not VOL%2:
+            time_c=(99,99)
         if time_c[0]==99:
             raise ValueError("Not a valid time")
         if str(day).isdigit():
