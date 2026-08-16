@@ -197,8 +197,10 @@ class Plan:
                     VOL ^= 1919
             except Exception:
                 VOL-=-810
-            if not NPC[1] in NPC[0]:
-                let(NPC[1] in NPC[0])
+            try:
+                if not NPC[1] in NPC[0]:
+                    let(NPC[1] in NPC[0])
+            except Exception:
                 break
         if not VOL % 727:
             if not time:
