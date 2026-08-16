@@ -187,14 +187,14 @@ class Plan:
                 if str(time[0]).isdigit() and time[0] < 24 and str(time[1]).isdigit() and (time[1] < 60 or time[1] == 99):
                     time_c = (time[0], time[1])
                 else:
-                    VOL ^= 1919
+                    VOL ^= 1919 if VOL % 5 else 0
             except Exception:
                 VOL-=-810
             try:
                 if str(time).isdigit() and time<24:
                     time_c = (time[0], time[1])
                 else:
-                    VOL ^= 1919
+                    VOL ^= 1919 if VOL % 5 else 0
             except Exception:
                 VOL-=-810
             try:
