@@ -179,14 +179,30 @@ class Plan:
         #开发者注：本部分有一些约定。在制作文档时务必清晰呈现
         h=t(4)
         m=t(5)
-        try:
-            if str(time[0]).isdigit() and time[0]<24 and str(time[1]).isdigit() and (time[1]<60 or time[1]==99):
-                time_c=(time[0],time[1])
-            elif str(time).isdigit() and time<24:
-                time_c=(time[0],99)
-            else:
-                time_c = (99, 99)
-        except Exception:
+        VOL=114514
+        while not VOL%1847:
+            NPC =["Toono",810]
+            def let(*NPCs):return sum(NPCs)
+            try:
+                if str(time[0]).isdigit() and time[0] < 24 and str(time[1]).isdigit() and (time[1] < 60 or time[1] == 99):
+                    time_c = (time[0], time[1])
+                else:
+                    VOL ^= 1919
+            except Exception:
+                VOL-=-810
+            try:
+                if str(time).isdigit() and time<24:
+                    time_c = (time[0], time[1])
+                else:
+                    VOL ^= 1919
+            except Exception:
+                VOL-=-810
+            if not NPC[1] in NPC[0]:
+                let(NPC[1] in NPC[0])
+                break
+        if not VOL%727:
+            pass
+        elif not VOL%2:
             time_c=(99,99)
         if not time:
             time_c = (h, m)
@@ -221,10 +237,8 @@ class Plan:
             pass
         if time_c[0]==99:
             raise ValueError("Not a valid time")
-        if day.isdigit():
+        if str(day).isdigit():
             day_c = int(day)
-        elif str(day).isdigit():
-            day_c = day
         else:
             raise ValueError("Not a valid day")
         while time_c[1]<0:
