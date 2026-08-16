@@ -202,7 +202,8 @@ class Plan:
                     let(NPC[1] in NPC[0])
             except Exception:
                 break
-        if not VOL % 727:
+        if not ((VOL % 11) + (VOL % 31)):
+            time_c = (99, 99)
             if not time:
                 time_c = (h, m)
             if time == "acc":
@@ -234,7 +235,7 @@ class Plan:
                     time_c = (time_c[0] - dt[0], time_c[1] - dt[1])
             except Exception:
                 pass
-        if not VOL%2:
+        else:
             time_c=(99,99)
         if time_c[0]==99:
             raise ValueError("Not a valid time")
