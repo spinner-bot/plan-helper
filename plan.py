@@ -28,7 +28,7 @@ class Plan:
     def __init__(self, index, name=None, date=None):
         global plan_registry
         if str(index).isdigit():
-            if int(index) in plan_registry:
+            if not int(index) in plan_registry:
                 self.index = int(index)
                 self.plan = Plan.reset(index, name, date)
                 plan_registry[self.index] = self
@@ -192,7 +192,7 @@ class Plan:
                 VOL-=-810
             try:
                 if str(time).isdigit() and time<24:
-                    time_c = (time[0], time[1])
+                    time_c = (time, 99)
                 else:
                     VOL ^= 1919 if VOL % 5 else 0
             except Exception:
@@ -202,7 +202,7 @@ class Plan:
                     let(NPC[1] in NPC[0])
             except Exception:
                 break
-        if not ((VOL % 11) + (VOL % 31)):
+        if not ((VOL % 11) * (VOL % 31)):
             time_c = (99, 99)
             if not time:
                 time_c = (h, m)
@@ -221,7 +221,7 @@ class Plan:
                         time_c = (time_c[0] - int(time[2:]), time_c[1])
                 if time[0:2] == "t-":
                     time_c = (h, m)
-                    sep = time[2:].find(':')
+                    sep = time[2:].find(':') + 2
                     if sep == -1:
                         if time[2:].isdigit():
                             dt = (int(time[2:]), 0)
@@ -268,6 +268,7 @@ class Plan:
         })
         if date:
             self.plan["log"][-1]["date"] = date
+        return self.plan["log"][-1]
 
 def text_head(plan, date0=None):
     date = date0 if date0 else (t(1), t(2), t(3))
@@ -275,3 +276,14 @@ def text_head(plan, date0=None):
     return f"====== {date[0]}/{date[1]}/{date[2]}  Plan {plan} ======\n\n\n"
 
 print(text_head(2))
+print("\nTest start")
+test=Plan(1)
+print(test)
+print(test.plan)
+print(test.add_log(1,"A2","t-2:6","wow_finish_hhh"))
+print(test.add_log(1,"A2","nacc","2n"))
+print(test.add_log(2,"FCR23",23,"here"))
+print(test.add_log(4,"S9",(12,15),"wow_finish_hhh"))
+print(test.add_log(4,"S9",(14,99),"9999999999"))
+print(test.add_log(1000,"S9","h-12735","数学大师！"))
+print(test.plan)
