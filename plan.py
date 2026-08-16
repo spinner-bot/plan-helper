@@ -176,7 +176,7 @@ class Plan:
         return(t_h,t_6m)
 
     def add_log(self, day, plan, time, content, date=None):
-        #开发者注：本部分有一些约定。在制作文档时务必清晰呈现
+        #开发者注：本方法有一些约定。在制作文档时务必清晰呈现
         h = t(4)
         m = t(5)
         VOL = 114514
