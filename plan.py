@@ -57,7 +57,7 @@ class Plan:
             index=""
             while (temp>0):
                 index += chr(65 + num % 26)
-                num //= 26
+                temp //= 26
             return index
         except:
             return ""
