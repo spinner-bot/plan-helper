@@ -52,15 +52,12 @@ class Plan:
 
     @staticmethod
     def num2char(num):
-        try:
-            temp=int(num)+1
-            index=""
-            while (temp>0):
-                index += chr(65 + temp % 26)
-                temp //= 26
-            return index
-        except:
-            return ""
+        result = ""
+        n = int(num)
+        while n >= 0:
+            result = chr(65 + n % 26) + result
+            n = n // 26 - 1
+        return result
 
     @staticmethod
     def char2num(char):
