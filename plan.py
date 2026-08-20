@@ -221,7 +221,7 @@ class Plan:
                 if time[0:2] == "t-":
                     time_c = (h, m)
                     sep = time[2:].find(':') + 2
-                    if sep == -1:
+                    if sep == 1:
                         if time[2:].isdigit():
                             dt = (int(time[2:]), 0)
                         else:
