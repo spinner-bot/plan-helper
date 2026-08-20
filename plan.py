@@ -67,7 +67,7 @@ class Plan:
         index=-1
         for i in range(len(char)):
             if ord(char[i])>=65 and ord(char[i])<=90:
-                index+=ord(char[i])*(26**(len(char)-1-i))
+                index+=(ord(char[i])-64)*(26**(len(char)-1-i))
             else:
                 index=-1
                 break
