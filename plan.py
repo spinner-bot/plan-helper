@@ -111,9 +111,11 @@ class Plan:
     def index_valid(char):
         test=Plan.sep_index(char)
         valid=1
-        for i in test:
-            valid^=bool(i)
-        return bool(valid)
+        for i in range(2):
+            if test[i]<0:
+                return False
+        else:
+            return True
 
     @staticmethod
     def syn_index(section, plan):
@@ -152,7 +154,7 @@ class Plan:
 
     def add_group(self, section, title, discription, pre_index,last_index):
         for key in self.plan["main"][section]["group"]:
-            if min(key[0]-pre_index) < max(key[1]-last_index):
+            if key[0]<pre_index<key[1]<last_index or pre_index<key[0]<last_index<key[1]:
                 return False
         self.plan["main"][section]["group"][(pre_index,last_index)] = {
             "title":title,
