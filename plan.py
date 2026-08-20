@@ -274,6 +274,7 @@ class Plan:
         temp = self.plan["log"]
         count=0
         f=[]
+        self.plan["log"]=[]
         for i in temp:
             if not count in index:
                 self.add_log(i["day"],i["plan"],i["time"],i["content"])
