@@ -235,7 +235,7 @@ class Plan:
             except Exception:
                 pass
         try:
-            VOL=time_c
+            time_c
         except Exception:
             time_c=(99,99)
         if time_c[0]==99:
@@ -269,7 +269,8 @@ class Plan:
         })
         if date:
             self.plan["log"][-1]["date"] = date
-        return self.plan["log"][-1]
+        return len(self.plan["log"])-1
+
 
 def text_head(plan, date0=None):
     date = date0 if date0 else (t(1), t(2), t(3))
