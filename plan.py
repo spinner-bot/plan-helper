@@ -263,14 +263,23 @@ class Plan:
             content_c= "Got some work done"
         self.plan["log"].append({
             "day": day_c,
-            "time": time_c,
             "plan": plan_c,
+            "time": time_c,
             "content": content_c
         })
         if date:
             self.plan["log"][-1]["date"] = date
         return len(self.plan["log"])-1
-
+    def pur_log(self,*index):
+        temp = self.plan["log"]
+        count=0
+        f=[]
+        for i in temp:
+            if not count in index:
+                self.add_log(i["day"],i["plan"],i["time"],i["content"])
+                f.append(i)
+            count+=1
+        return tuple(f)
 
 def text_head(plan, date0=None):
     date = date0 if date0 else (t(1), t(2), t(3))
