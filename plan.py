@@ -56,7 +56,7 @@ class Plan:
             temp=int(num)+1
             index=""
             while (temp>0):
-                index += chr(65 + num % 26)
+                index += chr(65 + temp % 26)
                 temp //= 26
             return index
         except:
