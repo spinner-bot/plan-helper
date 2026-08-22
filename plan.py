@@ -1,5 +1,6 @@
 # plan组装件
 from datetime import datetime
+import json
 
 def t(index):
     now = datetime.now()
@@ -285,8 +286,8 @@ class Plan:
     def to_json(self,obj):
         pass
 
-    def load_from_json(self,json):
-        pass
+    def load_from_json(self, json, index, name=None, date=None):
+        temp=Plan(index, name, date)
 
     def to_text(self,obj):
         pass
