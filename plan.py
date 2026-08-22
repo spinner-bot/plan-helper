@@ -162,7 +162,7 @@ class Plan:
         return (pre_index,last_index)
 
     def pur_group(self, section, pre_index, last_index):
-        return self.plan["main"][section]["group"].pop((pre_index,last_index))
+        return self.plan["main"][section]["group"].pop((f"{pre_index}_{last_index}"))
 
     def time_sum(self):
         t_m = 3;
