@@ -332,7 +332,9 @@ class Plan:
         temp.plan=plan
         return temp
 
-
+    def read_json(self, path, new_id=None):
+        with open(path,"r",encoding="utf-8") as f:
+            return Plan.load_from_json(f.read(),new_id)
 
     def to_text(self,obj):
         pass
