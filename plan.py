@@ -155,9 +155,9 @@ class Plan:
         for key in self.plan["main"][section]["group"]:
             if key[0]<pre_index<key[1]<last_index or pre_index<key[0]<last_index<key[1]:
                 return False
-        self.plan["main"][section]["group"][(pre_index,last_index)] = {
+        self.plan["main"][section]["group"][f"{pre_index}_{last_index}"] = {
             "title":title,
-            "discription":description
+            "description":description
         }
         return (pre_index,last_index)
 
