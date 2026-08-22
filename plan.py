@@ -269,6 +269,7 @@ class Plan:
         if date:
             self.plan["log"][-1]["date"] = date
         return len(self.plan["log"])-1
+
     def pur_log(self,*index):
         temp = self.plan["log"]
         count=0
