@@ -381,7 +381,6 @@ class Plan:
     def to_text(obj):
         pass
 
-
 print("\nTest start")
 test=Plan(1)
 print(test)
