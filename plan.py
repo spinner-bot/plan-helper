@@ -311,6 +311,7 @@ class Plan:
     def save_json(input, path):
         with open(path,"w",encoding="utf-8") as f:
             f.write(Plan.to_json(input))
+        return int(input) if str(input).isdigit() else input.index
 
     @staticmethod
     def load_from_json(json_f, new_id=None):
@@ -338,10 +339,13 @@ class Plan:
             return Plan.load_from_json(f.read(),new_id)
 
     def save(self, path):
-        Plan.save_json(self, path)
+        return Plan.save_json(self, path)
 
     def delete(self):
-        return
+        return Plan.registry.pop(self.index,-1)
+
+    def archive(self, path):
+        return Plan.registry.pop(self.index,-1)
 
     def upload(self, path):
         Plan.read_json(path,)
