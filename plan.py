@@ -282,10 +282,14 @@ class Plan:
             count+=1
         return tuple(f)
 
-def text_head(plan, date0=None):
-    date = date0 if date0 else (t(1), t(2), t(3))
-    date = date if len(date) == 3 else (t(1), t(2), t(3))
-    return f"====== {date[0]}/{date[1]}/{date[2]}  Plan {plan} ======\n\n\n"
+    def to_json(self,obj):
+        pass
+
+    def load_from_json(self,json):
+        pass
+
+    def to_text(self,obj):
+        pass
 
 
 print(text_head(2))
