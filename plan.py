@@ -292,7 +292,6 @@ class Plan:
         pass
 
 
-print(text_head(2))
 print("\nTest start")
 test=Plan(1)
 print(test)
