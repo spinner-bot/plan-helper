@@ -153,7 +153,8 @@ class Plan:
 
     def add_group(self, section, title, description, pre_index,last_index):
         for key in self.plan["main"][section]["group"]:
-            if key[0]<pre_index<key[1]<last_index or pre_index<key[0]<last_index<key[1]:
+            t_key=(key[:key.index("_")], key[key.index("_")+1:])
+            if t_key[0]<pre_index<t_key[1]<last_index or pre_index<t_key[0]<last_index<t_key[1]:
                 return False
         self.plan["main"][section]["group"][f"{pre_index}_{last_index}"] = {
             "title":title,
