@@ -312,9 +312,9 @@ class Plan:
         with open(path,"w",encoding="utf-8") as f:
             json.dump(Plan.to_json(input),f,ensure_ascii=False,indent=4)
 
-    def load_from_json(self, json, new_id=None):
+    def load_from_json(self, jsonf, new_id=None):
         global plan_registry
-        plan=json.loads(json)
+        plan=json.loads(jsonf)
         index=plan["head"]["index"]
         if new_id:
             if str(new_id).isdigit():
