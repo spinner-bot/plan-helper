@@ -306,10 +306,27 @@ class Plan:
             except Exception:
                 raise ValueError("Failed to parse the input as an object")
             obj=input
-        return json.dumps(obj)
+        return json.dumps(obj.plan)
 
-    def load_from_json(self, json, index, name=None, date=None):
-        temp=Plan(index, name, date)
+    def load_from_json(self, json, new_id=None):
+        global plan_registry
+        plan=json.loads(json)
+        index=plan["head"]["index"]
+        if new_id:
+            if str(new_id).isdigit():
+                if int(new_id) in plan_registry:
+                    raise IndexError("index(new_id) occupied")
+                else:
+                    index=int(new_id)
+                    plan["head"]["index"]=int(new_id)
+            else:
+                raise IndexError("index not valid")
+        else:
+            if index in plan_registry:
+                raise IndexError("index occupied")
+        temp=Plan(index)
+        temp.plan=plan
+        return temp
 
     def to_text(self,obj):
         pass
