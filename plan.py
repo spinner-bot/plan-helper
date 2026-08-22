@@ -345,7 +345,8 @@ class Plan:
         return Plan.registry.pop(self.index,-1)
 
     def archive(self, path):
-        return Plan.registry.pop(self.index,-1)
+        self.save(path)
+        return self.delete()
 
     def upload(self, path):
         Plan.read_json(path,)
