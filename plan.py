@@ -1,6 +1,8 @@
 # plan组装件
 from datetime import datetime
 import json
+from pathlib import Path
+import os
 
 def t(index):
     now = datetime.now()
@@ -348,8 +350,34 @@ class Plan:
         self.save(path)
         return self.delete()
 
-    def upload(self, path):
-        Plan.read_json(path,)
+    def upload(self, path, anchor=""):
+        id = self.index
+        temp = anchor / Path(f"/temp/upload/{id}.json")
+        if not self.archive(temp) == -1:
+            try:
+                new_p=Plan.read_json(path, id)
+                os.remove(temp)
+                try:
+                    os.rmdir(Path(temp).parent)
+                    try:
+                        os.rmdir(Path(temp).parent.parent)
+                    except OSError:
+                        pass
+                except OSError:
+                    pass
+                return new_p
+            except IndexError:
+                try:
+                    Plan.read_json(temp, id)
+                    return -1
+                except:
+                    return -2
+            except Exception:
+                return -2
+        else:
+            return -2
+
+
 
     @staticmethod
     def to_text(obj):
