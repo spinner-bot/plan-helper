@@ -283,7 +283,8 @@ class Plan:
             count+=1
         return tuple(f)
 
-    def to_json(self,input):
+    @staticmethod
+    def to_json(input):
         global plan_registry
         if str(input).isdigit():
             if int(input) in plan_registry:
@@ -308,11 +309,13 @@ class Plan:
             obj=input
         return json.dumps(obj.plan)
 
-    def save_json(self,input, path):
+    @staticmethod
+    def save_json(input, path):
         with open(path,"w",encoding="utf-8") as f:
             f.write(Plan.to_json(input))
 
-    def load_from_json(self, json_f, new_id=None):
+    @staticmethod
+    def load_from_json(json_f, new_id=None):
         global plan_registry
         plan=json.loads(json_f)
         index=plan["head"]["index"]
@@ -332,11 +335,19 @@ class Plan:
         temp.plan=plan
         return temp
 
-    def read_json(self, path, new_id=None):
+    @staticmethod
+    def read_json(path, new_id=None):
         with open(path,"r",encoding="utf-8") as f:
             return Plan.load_from_json(f.read(),new_id)
 
-    def to_text(self,obj):
+    def save(self, path):
+        Plan.save_json(self, path)
+
+    def upload(self, path):
+        Plan.read_json(path,)
+
+    @staticmethod
+    def to_text(obj):
         pass
 
 
