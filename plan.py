@@ -343,6 +343,9 @@ class Plan:
     def save(self, path):
         Plan.save_json(self, path)
 
+    def delete(self):
+
+
     def upload(self, path):
         Plan.read_json(path,)
 
