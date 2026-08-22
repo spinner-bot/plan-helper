@@ -283,8 +283,30 @@ class Plan:
             count+=1
         return tuple(f)
 
-    def to_json(self,obj):
-        pass
+    def to_json(self,input):
+        global plan_registry
+        if str(input).isdigit():
+            if int(input) in plan_registry:
+                obj=plan_registry[int(input)]
+            else:
+                raise ValueError("Failed to find an object pointed to by the input index")
+            try:
+                obj.index
+                obj.plan["head"]
+                obj.plan["main"]
+                obj.plan["log"]
+            except Exception:
+                raise ValueError("Failed to parse object pointed to by the input index")
+        else:
+            try:
+                input.index
+                input.plan["head"]
+                input.plan["main"]
+                input.plan["log"]
+            except Exception:
+                raise ValueError("Failed to parse the input as an object")
+            obj=input
+        return json.dumps(obj)
 
     def load_from_json(self, json, index, name=None, date=None):
         temp=Plan(index, name, date)
