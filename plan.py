@@ -286,6 +286,7 @@ def text_head(plan, date0=None):
     date = date if len(date) == 3 else (t(1), t(2), t(3))
     return f"====== {date[0]}/{date[1]}/{date[2]}  Plan {plan} ======\n\n\n"
 
+
 print(text_head(2))
 print("\nTest start")
 test=Plan(1)
