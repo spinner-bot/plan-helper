@@ -23,16 +23,15 @@ def t(index):
         else:
             return items[0]
 
-plan_registry={}
-
 class Plan:
+    registry = {}
+
     def __init__(self, index, name=None, date=None):
-        global plan_registry
         if str(index).isdigit():
-            if not int(index) in plan_registry:
+            if not int(index) in Plan.registry:
                 self.index = int(index)
                 self.plan = Plan.reset(index, name, date)
-                plan_registry[self.index] = self
+                Plan.registry[self.index] = self
             else:
                 raise IndexError("index occupied")
         else:
@@ -285,10 +284,9 @@ class Plan:
 
     @staticmethod
     def to_json(input):
-        global plan_registry
         if str(input).isdigit():
-            if int(input) in plan_registry:
-                obj=plan_registry[int(input)]
+            if int(input) in Plan.registry:
+                obj=Plan.registry[int(input)]
             else:
                 raise ValueError("Failed to find an object pointed to by the input index")
             try:
@@ -316,12 +314,11 @@ class Plan:
 
     @staticmethod
     def load_from_json(json_f, new_id=None):
-        global plan_registry
         plan=json.loads(json_f)
         index=plan["head"]["index"]
         if new_id:
             if str(new_id).isdigit():
-                if int(new_id) in plan_registry:
+                if int(new_id) in Plan.registry:
                     raise IndexError("index(new_id) occupied")
                 else:
                     index=int(new_id)
@@ -329,7 +326,7 @@ class Plan:
             else:
                 raise IndexError("index not valid")
         else:
-            if index in plan_registry:
+            if index in Plan.registry:
                 raise IndexError("index occupied")
         temp=Plan(index)
         temp.plan=plan
@@ -344,7 +341,7 @@ class Plan:
         Plan.save_json(self, path)
 
     def delete(self):
-
+        return
 
     def upload(self, path):
         Plan.read_json(path,)
