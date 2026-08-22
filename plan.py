@@ -151,13 +151,13 @@ class Plan:
     def pur_plan(self, index):
         pass # 这个功能较难实现，暂时空置
 
-    def add_group(self, section, title, discription, pre_index,last_index):
+    def add_group(self, section, title, description, pre_index,last_index):
         for key in self.plan["main"][section]["group"]:
             if key[0]<pre_index<key[1]<last_index or pre_index<key[0]<last_index<key[1]:
                 return False
         self.plan["main"][section]["group"][(pre_index,last_index)] = {
             "title":title,
-            "discription":discription
+            "discription":description
         }
         return (pre_index,last_index)
 
