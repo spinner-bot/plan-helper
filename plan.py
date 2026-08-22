@@ -377,10 +377,6 @@ class Plan:
         else:
             return -2
 
-    @staticmethod
-    def to_text(obj):
-        pass
-
 print("\nTest start")
 test=Plan(1)
 print(test)
