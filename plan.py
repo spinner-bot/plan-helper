@@ -308,6 +308,10 @@ class Plan:
             obj=input
         return json.dumps(obj.plan)
 
+    def save_json(self,input, path):
+        with open(path,"w",encoding="utf-8") as f:
+            json.dump(Plan.to_json(input),f,ensure_ascii=False,indent=4)
+
     def load_from_json(self, json, new_id=None):
         global plan_registry
         plan=json.loads(json)
@@ -327,6 +331,8 @@ class Plan:
         temp=Plan(index)
         temp.plan=plan
         return temp
+
+
 
     def to_text(self,obj):
         pass
